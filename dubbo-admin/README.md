@@ -6,7 +6,7 @@ docker run -it \
 -e REGISTRY_ADDRESS=zookeeper://192.168.10.168:2181 \
 -e CONFIG_CENTER=zookeeper://192.168.10.168:2181 \
 -e METADATA_REPORT_ADDRESS=zookeeper://192.168.10.168:2181 \
--p 8080:8080 --name dubbo-admin dubbo-admin:0.2.0
+-p 8080:8080 --name dubbo-admin yakun0622/dubbo-admin:0.2.0
 ```
 
 - REGISTRY_ADDRESS: admin.registry.address
