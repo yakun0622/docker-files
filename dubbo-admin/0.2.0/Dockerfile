@@ -16,9 +16,12 @@
 FROM maven:3-openjdk-8
 RUN mkdir /source && wget https://github.com/apache/dubbo-admin/archive/0.2.0.zip && unzip -q 0.2.0.zip -d /source
 WORKDIR /source/dubbo-admin-0.2.0
-RUN sed -i 's/admin.registry.address=zookeeper\:\/\/127.0.0.1:2181/admin.registry.address=${REGISTRY_ADDRESS\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
-RUN sed -i 's/admin.config-center=zookeeper\:\/\/127.0.0.1:2181/admin.config-center=${CONFIG_CENTER\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
-RUN sed -i 's/admin.metadata-report.address=zookeeper\:\/\/127.0.0.1:2181/admin.metadata-report.address=${METADATA_REPORT_ADDRESS\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
+RUN sed -i 's/admin.registry.address=zookeeper\:\/\/127.0.0.1:2181/admin.registry.address=${registry.address\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
+RUN sed -i 's/admin.config-center=zookeeper\:\/\/127.0.0.1:2181/admin.config-center=${config-center\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
+RUN sed -i 's/admin.metadata-report.address=zookeeper\:\/\/127.0.0.1:2181/admin.metadata-report.address=${metadata-report.address\:zookeeper\:\/\/127.0.0.1:2181}/g' ./dubbo-admin-server/src/main/resources/application.properties
+RUN sed -i 's/admin.root.user.name=root/admin.root.user.name=${root.user.name:root}/g' ./dubbo-admin-server/src/main/resources/application.properties
+RUN sed -i 's/admin.root.user.password=root/admin.root.user.password=${root.user.password:root}/g' ./dubbo-admin-server/src/main/resources/application.properties
+
 RUN mvn --batch-mode clean package -Dmaven.test.skip=true
 
 FROM openjdk:8-jre
